@@ -2,7 +2,7 @@ var express = require('express');
 var request = require('request');
 var querystring = require('querystring');
 var cookieParser = require('cookie-parser');
-var spotifyAuthKeys = require('./config/config.js');
+var spotifyAuthKeys = require('./config/config');
 
 var client_id = spotifyAuthKeys.client_id; // Your client id
 var client_secret = spotifyAuthKeys.client_secret; // Your client secret
@@ -133,5 +133,6 @@ app.get('/refresh_token', function(req, res) {
   });
 });
 
-console.log('Listening on 8888');
-app.listen(8888);
+var port = process.env.PORT || 8888;
+console.log('Listening on ' + port);
+app.listen(port);
