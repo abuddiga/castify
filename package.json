@@ -1,0 +1,23 @@
+{
+  "name": "castify",
+  "version": "0.0.1",
+  "description": "<!--  > This material was originally posted [here](http://www.quora.com/What-is-Amazons-approach-to-product-development-and-product-management). It is reproduced here for posterities sake.",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/abuddiga/castify.git"
+  },
+  "author": "Akshay Buddiga",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/abuddiga/castify/issues"
+  },
+  "homepage": "https://github.com/abuddiga/castify#readme",
+  "dependencies": {
+    "express": "^4.13.4",
+    "nodemon": "^1.8.1"
+  }
+}
