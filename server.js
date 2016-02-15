@@ -4,9 +4,9 @@ var querystring = require('querystring');
 var cookieParser = require('cookie-parser');
 var spotifyAuthKeys = require('./config/config.js');
 
-var client_id = ENV[CLIENT_ID] || spotifyAuthKeys.client_id; // Your client id
-var client_secret = ENV[CLIENT_SECRET] || spotifyAuthKeys.client_secret; // Your client secret
-var redirect_uri = ENV[REDIRECT_URI] || spotifyAuthKeys.redirect_uri; // Your redirect uri
+var client_id = spotifyAuthKeys.client_id; // Your client id
+var client_secret = spotifyAuthKeys.client_secret; // Your client secret
+var redirect_uri = spotifyAuthKeys.redirect_uri; // Your redirect uri
 
 /**
  * Generates a random string containing numbers and letters
