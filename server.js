@@ -2,7 +2,7 @@ var express = require('express');
 var request = require('request');
 var querystring = require('querystring');
 var cookieParser = require('cookie-parser');
-var spotifyAuthKeys = require('./config/config');
+var spotifyAuthKeys = require('./config/config.js');
 
 var client_id = spotifyAuthKeys.client_id; // Your client id
 var client_secret = spotifyAuthKeys.client_secret; // Your client secret
