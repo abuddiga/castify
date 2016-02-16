@@ -1,4 +1,4 @@
-(function() {
+var generateAuth = function() {
   /**
    * Obtains parameters from the hash of the URL
    * @return Object
@@ -22,6 +22,8 @@
   var access_token = params.access_token,
       refresh_token = params.refresh_token,
       error = params.error;
+  window.access_token = access_token;
+  window.refresh_token = refresh_token;
   if (error) {
     alert('There was an error during the authentication');
   } else {
@@ -62,4 +64,6 @@
       });
     }, false);
   }
-})();
+};
+
+generateAuth();
