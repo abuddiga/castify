@@ -9,7 +9,7 @@
 
 <div class="songs" ng-repeat="song in data.songList track by $index"> 
   <div class="songEntry">
-    <div class="name">{{song.track.name}}</div>
-    <div class="artists">{{song.track.artists[0].name}}</div>
+    <div class="name" ng-click="selectSong($index)">{{song.track.name}}</div>
+<!--     <div class="artists">{{song.track.artists[0].name}}</div> -->
   </div>
 </div>
