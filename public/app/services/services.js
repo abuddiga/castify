@@ -1,4 +1,5 @@
-var PLAYLIST_API_URL = 'https://api.spotify.com/v1/me/playlists';
+var ALL_PLAYLISTS_URL = 'https://api.spotify.com/v1/me/playlists';
+var CURRENT_PLAYLIST_URL = 'https://api.spotify.com/v1/users/{user_id}/playlists/{playlist_id}/tracks';
 
 angular.module('castify.services', [])
 
@@ -12,7 +13,27 @@ angular.module('castify.services', [])
     if (window.access_token) {
       return $http({
         method: 'GET',
-        url: PLAYLIST_API_URL,
+        url: ALL_PLAYLISTS_URL,
+        headers: {
+          'Authorization': 'Bearer ' + window.access_token
+        }
+      }).then(function (res) {
+          return res;
+      }).catch(function (err) {
+        console.error(err);
+      });
+    } else{
+      console.error('No access token');
+      // else return something
+    }
+  };
+
+  var getSongList = function(playlist) {
+    if (window.access_token) {
+      var playlistUrl = CURRENT_PLAYLIST_URL.replace(/{user_id}/, playlist.owner.id).replace(/{playlist_id}/, playlist.id);
+      return $http({
+        method: 'GET',
+        url: playlistUrl,
         headers: {
           'Authorization': 'Bearer ' + window.access_token
         }
@@ -28,7 +49,8 @@ angular.module('castify.services', [])
   };
 
   return {
-    getPlaylists: getPlaylists
+    getPlaylists: getPlaylists,
+    getSongList: getSongList
   };
 })
 
