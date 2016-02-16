@@ -7,7 +7,8 @@ angular.module('castify.playlist', [])
     playlists: [],
     currentPlaylist: {},
     songList: [],
-    currentSong: {}
+    currentSong: {},
+    currentSongIndex: 0
   };
 
   var initializePlaylists = function () {
@@ -16,12 +17,45 @@ angular.module('castify.playlist', [])
       $scope.data.playlists = playlists.data.items;
       $scope.selectPlaylist(0)
       .then(function() {
-        $scope.selectSong(0);
+        $scope.data.currentSongIndex = 0;
+        $scope.selectSong($scope.data.currentSongIndex)
+        .then(function() {
+          window.player = initializePlayer($scope.data.currentSong);
+        })
       })
     })
     .catch(function (error) {
       console.error(error);
     });
+  };
+
+  initializePlayer = function(song) {
+    console.log(song);
+    return new YT.Player('player', {
+      height: '390',
+      width: '640',
+      videoId: song.id.videoId,
+      events: {
+        'onReady': onPlayerReady,
+        'onStateChange': onPlayerStateChange
+      }
+    });
+  };
+
+  var onPlayerReady = function(event) {
+      event.target.playVideo();
+  };
+
+  var onPlayerStateChange = function (event) {
+    // fires if song has ended
+    if(event.data === 0) {
+      if ($scope.data.currentSongIndex + 1 < $scope.data.songList.length) {
+        $scope.data.currentSongIndex++;
+      } else {
+        $scope.data.currentSongIndex = 0;
+      }
+      $scope.selectSong($scope.data.currentSongIndex);
+    }
   };
 
   $scope.selectPlaylist = function(index) {
@@ -39,15 +73,14 @@ angular.module('castify.playlist', [])
   $scope.selectSong = function(index) {
     var selectedSong = $scope.data.songList[index];
 
-    Video.getVideo(selectedSong)
+    return Video.getVideo(selectedSong)
     .then(function (song) {
-      console.log('got songs: ', song.data.items.length);
       var song = song.data.items[0];
       var videoSrc = YOUTUBE_VIDEO_URL.replace(/{videoId}/, song.id.videoId);
       song.src = $sce.trustAsResourceUrl(videoSrc);
       $scope.data.currentSong = song;
 
-      // Video.playVideo(song);
+      Video.playVideo(song);
     })
     .catch(function (error) {
       console.error(error);

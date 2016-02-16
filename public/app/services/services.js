@@ -100,9 +100,15 @@ angular.module('castify.services', [])
     } );
   };
 
+  var playVideo = function(song) {
+    window.player.videoId = song.id.videoId;
+    window.player.cueVideoById(song.id.videoId);
+    window.player.playVideo();
+  };
 
   return {
-    getVideo: getVideo
+    getVideo: getVideo,
+    playVideo: playVideo
   };
 })
 
