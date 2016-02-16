@@ -121,8 +121,9 @@ angular.module('castify.services', [])
    */
 
   var logout = function() {
-    localStorage.setItem('access_token', 'undefined');
-    localStorage.setItem('refresh_token', 'undefined');
+    console.log('log out service');
+    localStorage.removeItem('access_token');
+    localStorage.removeItem('refresh_token');
   };
 
   var getHashParams = function () {

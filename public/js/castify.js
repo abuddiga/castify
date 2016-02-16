@@ -13,20 +13,22 @@ var generateAuth = function() {
     return hashParams;
   }
 
-  if (!localStorage.getItem('access_token') || localStorage.getItem('access_token') === 'undefined') {
+  if (!localStorage.getItem('access_token')) {
     var params = getHashParams();
     var access_token = params.access_token,
         refresh_token = params.refresh_token,
         error = params.error;
-    localStorage.setItem('access_token', access_token);
-    localStorage.setItem('refresh_token',refresh_token);
+    if (access_token && refresh_token) {
+      localStorage.setItem('access_token', access_token);
+      localStorage.setItem('refresh_token',refresh_token);
+    }
 
     if (error) {
       alert('There was an error during the authentication');
     }
   }
 
-  if (localStorage.getItem('access_token') && localStorage.getItem('access_token') !== 'undefined') {
+  if (localStorage.getItem('access_token')) {
     $.ajax({
         url: 'https://api.spotify.com/v1/me',
         headers: {
@@ -59,7 +61,7 @@ var generateAuth = function() {
     // }, false);
 };
 
-if (!localStorage.getItem('access_token') || localStorage.getItem('access_token') === 'undefined') {
+if (!localStorage.getItem('access_token')) {
   generateAuth();
 } else {
   $('#login').hide();

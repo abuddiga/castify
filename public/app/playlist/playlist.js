@@ -101,11 +101,10 @@ angular.module('castify.playlist', [])
   $scope.logout = function() {
     console.log('controller');
     Auth.logout();
-    $location.path('/playlist');
+    $window.location.reload();
   }
 
-  if (localStorage.getItem('access_token') && localStorage.getItem('access_token') !== 'undefined') {
-    console.log('token: ', typeof localStorage.getItem('access_token'));
+  if (localStorage.getItem('access_token')) {
     initializePlaylists();
   }
 });
