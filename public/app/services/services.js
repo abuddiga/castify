@@ -19,6 +19,9 @@ angular.module('castify.services', [])
         url: ALL_PLAYLISTS_URL,
         headers: {
           'Authorization': 'Bearer ' + localStorage.getItem('access_token')
+        },
+        params: {
+          limit: 50
         }
       }).then(function (res) {
           return res;
