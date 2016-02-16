@@ -8,6 +8,7 @@ angular.module('castify.playlist', [])
     currentPlaylist: {},
     songList: [],
     currentSong: {},
+    currentVideo: {},
     currentSongIndex: 0
   };
 
@@ -19,9 +20,9 @@ angular.module('castify.playlist', [])
       .then(function() {
         $scope.data.currentSongIndex = 0;
         $scope.selectSong($scope.data.currentSongIndex)
-        .then(function() {
-          window.player = initializePlayer($scope.data.currentSong);
-        })
+        .then(function(song) {
+          window.player = initializePlayer(song);
+        });
       })
     })
     .catch(function (error) {
@@ -54,7 +55,10 @@ angular.module('castify.playlist', [])
       } else {
         $scope.data.currentSongIndex = 0;
       }
-      $scope.selectSong($scope.data.currentSongIndex);
+      $scope.selectSong($scope.data.currentSongIndex)
+      .then(function(video) {
+        Video.playVideo(video);
+      });
     }
   };
 
@@ -74,13 +78,13 @@ angular.module('castify.playlist', [])
     var selectedSong = $scope.data.songList[index];
 
     return Video.getVideo(selectedSong)
-    .then(function (song) {
-      var song = song.data.items[0];
-      var videoSrc = YOUTUBE_VIDEO_URL.replace(/{videoId}/, song.id.videoId);
-      song.src = $sce.trustAsResourceUrl(videoSrc);
-      $scope.data.currentSong = song;
-
-      Video.playVideo(song);
+    .then(function (videos) {
+      var video = videos.data.items[0];
+      // var videoSrc = YOUTUBE_VIDEO_URL.replace(/{videoId}/, video.id.videoId);
+      // video.src = $sce.trustAsResourceUrl(videoSrc);
+      $scope.data.currentVideo = video;
+      return video;
+      // Video.playVideo(video);
     })
     .catch(function (error) {
       console.error(error);

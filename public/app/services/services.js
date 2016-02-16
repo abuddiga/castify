@@ -39,6 +39,9 @@ angular.module('castify.services', [])
         url: playlistUrl,
         headers: {
           'Authorization': 'Bearer ' + window.access_token
+        },
+        params: {
+          limit: 50
         }
       }).then(function (res) {
           return res;
@@ -92,7 +95,6 @@ angular.module('castify.services', [])
         type: 'video', 
         videoEmbeddable: true, 
         q: options.query,
-        // order: 'viewCount',
         maxResults: options.max, 
         key: options.key
       },
@@ -100,9 +102,9 @@ angular.module('castify.services', [])
     } );
   };
 
-  var playVideo = function(song) {
-    window.player.videoId = song.id.videoId;
-    window.player.cueVideoById(song.id.videoId);
+  var playVideo = function(video) {
+    window.player.videoId = video.id.videoId;
+    window.player.cueVideoById(video.id.videoId);
     window.player.playVideo();
   };
 
