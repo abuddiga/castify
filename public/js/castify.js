@@ -12,61 +12,56 @@ var generateAuth = function() {
     }
     return hashParams;
   }
-  var userProfileSource = document.getElementById('user-profile-template').innerHTML,
-      userProfileTemplate = Handlebars.compile(userProfileSource),
-      userProfilePlaceholder = document.getElementById('user-profile');
-  var oauthSource = document.getElementById('oauth-template').innerHTML,
-      oauthTemplate = Handlebars.compile(oauthSource),
-      oauthPlaceholder = document.getElementById('oauth');
-  var params = getHashParams();
-  var access_token = params.access_token,
-      refresh_token = params.refresh_token,
-      error = params.error;
-  window.access_token = access_token;
-  window.refresh_token = refresh_token;
-  if (error) {
-    alert('There was an error during the authentication');
-  } else {
-    if (access_token) {
-      // render oauth info
-      oauthPlaceholder.innerHTML = oauthTemplate({
-        access_token: access_token,
-        refresh_token: refresh_token
-      });
-      $.ajax({
-          url: 'https://api.spotify.com/v1/me',
-          headers: {
-            'Authorization': 'Bearer ' + access_token
-          },
-          success: function(response) {
-            userProfilePlaceholder.innerHTML = userProfileTemplate(response);
-            window.user = response;
-            $('#login').hide();
-            $('#loggedin').show();
-          }
-      });
-    } else {
-        // render initial screen
-        $('#login').show();
-        $('#loggedin').hide();
+
+  if (!localStorage.access_token || localStorage.access_token === 'undefined') {
+    var params = getHashParams();
+    var access_token = params.access_token,
+        refresh_token = params.refresh_token,
+        error = params.error;
+    localStorage.access_token = access_token;
+    localStorage.refresh_token = refresh_token;
+    
+    if (error) {
+      alert('There was an error during the authentication');
     }
-    document.getElementById('obtain-new-token').addEventListener('click', function() {
-      $.ajax({
-        url: '/refresh_token',
-        data: {
-          'refresh_token': refresh_token
-        }
-      }).done(function(data) {
-        access_token = data.access_token;
-        oauthPlaceholder.innerHTML = oauthTemplate({
-          access_token: access_token,
-          refresh_token: refresh_token
-        });
-      });
-    }, false);
   }
+
+  if (localStorage.access_token && localStorage.access_token !== 'undefined') {
+    $.ajax({
+        url: 'https://api.spotify.com/v1/me',
+        headers: {
+          'Authorization': 'Bearer ' + localStorage.access_token
+        },
+        success: function(response) {
+          window.user = response;
+          $('#login').hide();
+          $('#loggedin').show();
+        }
+    });
+  } else {
+      // render initial screen
+      $('#login').show();
+      $('#loggedin').hide();
+  }
+    // document.getElementById('obtain-new-token').addEventListener('click', function() {
+    //   $.ajax({
+    //     url: '/refresh_token',
+    //     data: {
+    //       'refresh_token': refresh_token
+    //     }
+    //   }).done(function(data) {
+    //     access_token = data.access_token;
+    //     oauthPlaceholder.innerHTML = oauthTemplate({
+    //       access_token: access_token,
+    //       refresh_token: refresh_token
+    //     });
+    //   });
+    // }, false);
 };
 
-if (!window.access_token) {
+if (!localStorage.access_token || localStorage.access_token === 'undefined') {
   generateAuth();
+} else {
+  $('#login').hide();
+  $('#loggedin').show();
 }

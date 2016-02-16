@@ -2,7 +2,7 @@ var YOUTUBE_VIDEO_URL = "https://www.youtube.com/embed/{videoId}?autoplay=1"
 
 angular.module('castify.playlist', [])
 
-.controller('PlaylistController', function ($scope, $location, $sce, Playlist, Video) {
+.controller('PlaylistController', function ($scope, $location, $window, $sce, Playlist, Video) {
   $scope.data = {
     playlists: [],
     currentPlaylist: {},
@@ -98,5 +98,7 @@ angular.module('castify.playlist', [])
     });
   };
 
-  initializePlaylists();
+  if (localStorage.access_token !== 'undefined') {
+    initializePlaylists();
+  }
 });

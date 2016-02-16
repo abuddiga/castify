@@ -6,19 +6,19 @@ var YOUTUBE_API_KEY = 'AIzaSyCfYZqqCvViNHiH-9CdALkaDJ1BG8Niivc';
 
 angular.module('castify.services', [])
 
-.factory('Playlist', function($http, Auth) {
+.factory('Playlist', function($http, $window, Auth) {
   // var params = Auth.getHashParams();
   // var access_token = params.access_token,
   //     refresh_token = params.refresh_token,
   //     error = params.error;
 
   var getPlaylists = function() {
-    if (window.access_token) {
+    if (localStorage.access_token) {
       return $http({
         method: 'GET',
         url: ALL_PLAYLISTS_URL,
         headers: {
-          'Authorization': 'Bearer ' + window.access_token
+          'Authorization': 'Bearer ' + localStorage.access_token
         }
       }).then(function (res) {
           return res;
@@ -32,13 +32,13 @@ angular.module('castify.services', [])
   };
 
   var getSongList = function(playlist) {
-    if (window.access_token) {
+    if (localStorage.access_token) {
       var playlistUrl = CURRENT_PLAYLIST_URL.replace(/{user_id}/, playlist.owner.id).replace(/{playlist_id}/, playlist.id);
       return $http({
         method: 'GET',
         url: playlistUrl,
         headers: {
-          'Authorization': 'Bearer ' + window.access_token
+          'Authorization': 'Bearer ' + localStorage.access_token
         },
         params: {
           limit: 50
