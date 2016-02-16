@@ -1,7 +1,8 @@
 <!doctype html>
-<html>
+<html ng-app="castify">
   <head>
-    <title>Example of the Authorization Code flow with Spotify</title>
+    <meta charset="utf-8" />
+    <title>Castify</title>
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="css/castify.css">
   </head>
@@ -14,6 +15,8 @@
       </div>
       <div id="loggedin">
         <div id="user-profile">
+        </div>
+        <div id="playlistContainer" ng-view>
         </div>
         <div id="oauth">
         </div>
@@ -51,7 +54,10 @@
 
     <script src="//cdnjs.cloudflare.com/ajax/libs/handlebars.js/2.0.0-alpha.1/handlebars.min.js"></script>
     <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
-    <script src="lib/angular/angular.min.js"></script>
-    <script src="lib/angular-route/angular-route.min.js"></script>
+    <script src="lib/angular/angular.js"></script>
+    <script src="lib/angular-route/angular-route.js"></script>
     <script src="js/castify.js"></script>
+    <script src="app/services/services.js"></script>
+    <script src="app/playlist/playlist.js"></script>
+    <script src="app/app.js"></script>
 </html>
