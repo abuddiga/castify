@@ -40,6 +40,7 @@ var generateAuth = function() {
           },
           success: function(response) {
             userProfilePlaceholder.innerHTML = userProfileTemplate(response);
+            window.user = response;
             $('#login').hide();
             $('#loggedin').show();
           }
@@ -66,4 +67,6 @@ var generateAuth = function() {
   }
 };
 
-generateAuth();
+if (!window.access_token) {
+  generateAuth();
+}
