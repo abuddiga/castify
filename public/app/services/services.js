@@ -1,5 +1,8 @@
 var ALL_PLAYLISTS_URL = 'https://api.spotify.com/v1/me/playlists';
 var CURRENT_PLAYLIST_URL = 'https://api.spotify.com/v1/users/{user_id}/playlists/{playlist_id}/tracks';
+var YOUTUBE_API_URL = 'https://www.googleapis.com/youtube/v3/search';
+var YOUTUBE_API_KEY = 'AIzaSyBkpIBz-LidcgHX3-gZZXpGUv9oOSu_goU';
+
 
 angular.module('castify.services', [])
 
@@ -51,6 +54,51 @@ angular.module('castify.services', [])
   return {
     getPlaylists: getPlaylists,
     getSongList: getSongList
+  };
+})
+
+.factory('Video', function($http) {
+  var getVideo = function(song) {
+    var options = {
+      query: song.track.name,
+      max: 1,
+      key: YOUTUBE_API_KEY
+    };
+
+    return searchYouTube(options)
+    .then(function (res) {
+      return res;
+    })
+    .catch(function (err) {
+      console.error(err);
+    });
+  };
+
+  var searchYouTube = function(options) {
+    return $http( {
+      url: YOUTUBE_API_URL,
+      type: 'GET',
+      data: { 
+        part: 'snippet',
+        type: 'video', 
+        videoEmbeddable: true, 
+        q: options.query, 
+        maxResults: options.max, 
+        key: options.key
+      },
+      contentType: 'application/json'
+      // success: callback,
+      // error: (error) => { console.error( 'Error: Could not complete API request.', error.responseText ); }
+    } );
+  };
+
+  var playVideo = function(song) {
+    return 0;
+  };
+
+  return {
+    getVideo: getVideo,
+    playVideo: playVideo
   };
 })
 
