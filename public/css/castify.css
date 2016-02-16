@@ -9,6 +9,11 @@
   width: 500px;
 }
 
+.video-player {
+	width: 800px;
+	height: 450px;
+}
+
 .video-player-details {
   background: #fff;
   padding: 8px;

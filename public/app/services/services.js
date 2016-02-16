@@ -62,7 +62,7 @@ angular.module('castify.services', [])
     var songName = song.track.name;
     var artist = song.track.artists[0].name;
     console.log('searching for: ', songName, artist);
-    return song + ' ' + artist;
+    return songName + ' ' + artist;
   };
 
   var getVideo = function(song) {
@@ -89,7 +89,6 @@ angular.module('castify.services', [])
       url: YOUTUBE_API_URL,
       params: { 
         part: 'snippet',
-        // order: 'viewCount',
         type: 'video', 
         videoEmbeddable: true, 
         q: options.query,
@@ -101,13 +100,9 @@ angular.module('castify.services', [])
     } );
   };
 
-  var playVideo = function(song) {
-    return 0;
-  };
 
   return {
-    getVideo: getVideo,
-    playVideo: playVideo
+    getVideo: getVideo
   };
 })
 

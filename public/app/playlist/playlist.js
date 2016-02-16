@@ -42,7 +42,7 @@ angular.module('castify.playlist', [])
     Video.getVideo(selectedSong)
     .then(function (song) {
       console.log('got songs: ', song.data.items.length);
-      var song = song.data.items[1];
+      var song = song.data.items[0];
       var videoSrc = YOUTUBE_VIDEO_URL.replace(/{videoId}/, song.id.videoId);
       song.src = $sce.trustAsResourceUrl(videoSrc);
       $scope.data.currentSong = song;
