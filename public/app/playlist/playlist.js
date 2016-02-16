@@ -33,12 +33,13 @@ angular.module('castify.playlist', [])
 
   $scope.selectSong = function(index) {
     $scope.data.currentSong = $scope.data.songList[index];
-    
+
     Video.getVideo($scope.data.currentSong)
     .then(function (song) {
       console.log('got song');
+      var song = song.data.items[0];
       console.log(song);
-      // Video.playVideo(song);
+      Video.playVideo(song);
     })
     .catch(function (error) {
       console.error(error);
