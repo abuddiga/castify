@@ -39,9 +39,6 @@ angular.module('castify.services', [])
         url: playlistUrl,
         headers: {
           'Authorization': 'Bearer ' + localStorage.getItem('access_token')
-        },
-        params: {
-          limit: 50
         }
       }).then(function (res) {
           return res;
