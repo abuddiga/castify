@@ -58,15 +58,24 @@ angular.module('castify.services', [])
 })
 
 .factory('Video', function($http) {
+  var formatQuery = function(song) {
+    var songName = song.track.name;
+    var artist = song.track.artists[0].name;
+    console.log('searching for: ', songName, artist);
+    return song + ' ' + artist;
+  };
+
   var getVideo = function(song) {
+    var query = formatQuery(song); 
     var options = {
-      query: song.track.name,
-      max: 1,
+      query: query,
+      max: 5,
       key: YOUTUBE_API_KEY
     };
 
     return searchYouTube(options)
     .then(function (res) {
+      console.log(res);
       return res;
     })
     .catch(function (err) {
@@ -80,9 +89,11 @@ angular.module('castify.services', [])
       url: YOUTUBE_API_URL,
       params: { 
         part: 'snippet',
+        // order: 'viewCount',
         type: 'video', 
         videoEmbeddable: true, 
-        q: options.query, 
+        q: options.query,
+        // order: 'viewCount',
         maxResults: options.max, 
         key: options.key
       },
