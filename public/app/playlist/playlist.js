@@ -74,6 +74,13 @@ angular.module('castify.playlist', [])
       });
   };
 
+  $scope.changeSong = function(index) {
+    $scope.selectSong(index)
+    .then(function(video) {
+      Video.playVideo(video);
+    });
+  }
+
   $scope.selectSong = function(index) {
     var selectedSong = $scope.data.songList[index];
 
