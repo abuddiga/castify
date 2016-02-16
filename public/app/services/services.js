@@ -13,12 +13,12 @@ angular.module('castify.services', [])
   //     error = params.error;
 
   var getPlaylists = function() {
-    if (localStorage.access_token) {
+    if (localStorage.getItem('access_token')) {
       return $http({
         method: 'GET',
         url: ALL_PLAYLISTS_URL,
         headers: {
-          'Authorization': 'Bearer ' + localStorage.access_token
+          'Authorization': 'Bearer ' + localStorage.getItem('access_token')
         }
       }).then(function (res) {
           return res;
@@ -32,13 +32,13 @@ angular.module('castify.services', [])
   };
 
   var getSongList = function(playlist) {
-    if (localStorage.access_token) {
+    if (localStorage.getItem('access_token')) {
       var playlistUrl = CURRENT_PLAYLIST_URL.replace(/{user_id}/, playlist.owner.id).replace(/{playlist_id}/, playlist.id);
       return $http({
         method: 'GET',
         url: playlistUrl,
         headers: {
-          'Authorization': 'Bearer ' + localStorage.access_token
+          'Authorization': 'Bearer ' + localStorage.getItem('access_token')
         },
         params: {
           limit: 50
@@ -119,6 +119,12 @@ angular.module('castify.services', [])
    * Obtains parameters from the hash of the URL
    * @return Object
    */
+
+  var logout = function() {
+    localStorage.setItem('access_token', 'undefined');
+    localStorage.setItem('refresh_token', 'undefined');
+  };
+
   var getHashParams = function () {
     var hashParams = {};
     var e, r = /([^&;=]+)=?([^&;]*)/g,
@@ -185,7 +191,8 @@ angular.module('castify.services', [])
 
   return {
     getHashParams: getHashParams,
-    generateAuth: generateAuth
+    generateAuth: generateAuth,
+    logout: logout
   };
 });
 

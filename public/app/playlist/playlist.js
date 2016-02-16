@@ -2,7 +2,7 @@ var YOUTUBE_VIDEO_URL = "https://www.youtube.com/embed/{videoId}?autoplay=1"
 
 angular.module('castify.playlist', [])
 
-.controller('PlaylistController', function ($scope, $location, $window, $sce, Playlist, Video) {
+.controller('PlaylistController', function ($scope, $location, $window, $sce, Playlist, Video, Auth) {
   $scope.data = {
     playlists: [],
     currentPlaylist: {},
@@ -98,7 +98,14 @@ angular.module('castify.playlist', [])
     });
   };
 
-  if (localStorage.access_token !== 'undefined') {
+  $scope.logout = function() {
+    console.log('controller');
+    Auth.logout();
+    $location.path('/playlist');
+  }
+
+  if (localStorage.getItem('access_token') && localStorage.getItem('access_token') !== 'undefined') {
+    console.log('token: ', typeof localStorage.getItem('access_token'));
     initializePlaylists();
   }
 });
