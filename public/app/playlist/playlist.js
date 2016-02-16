@@ -7,7 +7,7 @@ angular.module('castify.playlist', [])
     playlists: [],
     currentPlaylist: {},
     songList: [],
-    currentSong: {},
+    // currentSong: {},
     currentVideo: {},
     currentSongIndex: 0
   };
@@ -16,14 +16,14 @@ angular.module('castify.playlist', [])
     Playlist.getPlaylists()
     .then(function (playlists) {
       $scope.data.playlists = playlists.data.items;
-      $scope.selectPlaylist(0)
-      .then(function() {
-        $scope.data.currentSongIndex = 0;
-        $scope.selectSong($scope.data.currentSongIndex)
-        .then(function(song) {
-          window.player = initializePlayer(song);
-        });
-      })
+      return $scope.selectPlaylist(0);
+    })
+    .then(function() {
+      $scope.data.currentSongIndex = 0;
+      return $scope.selectSong($scope.data.currentSongIndex)
+    })
+    .then(function(song) {
+      window.player = initializePlayer(song);
     })
     .catch(function (error) {
       console.error(error);
