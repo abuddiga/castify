@@ -1,9 +1,18 @@
 #login, #loggedin {
   display: none;
-};
+}
+
 .text-overflow {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
   width: 500px;
-};
+}
+
+.video-player-details {
+  background: #fff;
+  padding: 8px;
+  border: 0;
+  box-shadow: 0 1px 2px rgba(0,0,0,.1);
+  margin-top: 10px;
+}
