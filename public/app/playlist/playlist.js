@@ -6,6 +6,7 @@ angular.module('castify.playlist', [])
   $scope.data = {
     playlists: [],
     currentPlaylist: {},
+    currentPlaylistIndex: 0,
     songList: [],
     // currentSong: {},
     currentVideo: {},
@@ -16,7 +17,8 @@ angular.module('castify.playlist', [])
     Playlist.getPlaylists()
     .then(function (playlists) {
       $scope.data.playlists = playlists.data.items;
-      return $scope.selectPlaylist(0);
+      $scope.data.currentPlaylistIndex = 0;
+      return $scope.selectPlaylist($scope.data.currentPlaylistIndex);
     })
     .then(function() {
       $scope.data.currentSongIndex = 0;
@@ -63,6 +65,7 @@ angular.module('castify.playlist', [])
   };
 
   $scope.selectPlaylist = function(index) {
+    $scope.data.currentPlaylistIndex = index;
     $scope.data.currentPlaylist = $scope.data.playlists[index];
 
     return Playlist.getSongList($scope.data.currentPlaylist)
@@ -75,6 +78,7 @@ angular.module('castify.playlist', [])
   };
 
   $scope.changeSong = function(index) {
+    $scope.data.currentSongIndex = index;
     $scope.selectSong(index)
     .then(function(video) {
       Video.playVideo(video);
