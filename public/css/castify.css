@@ -111,6 +111,9 @@ body {
 }
 
 .logout {
+  background-color: #121314;
+  color: #88898c;
+  border: none;
   position: relative;
   float:right;
   padding-top: 5px;
