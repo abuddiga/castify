@@ -1,24 +1,8 @@
 body {
-  /*background-color: #1c1c1f;*/
   font: 'Lucida Grande', Tahoma, sans-serif;
-  /*background-color: rgb(18, 19, 20);*/
   background-color: #121314;
   color: #88898c;
-  /*width: 100%;*/
-  /*height: auto;*/
-  /*overflow: hidden;*/
 }
-
-/*table {
-  max-width: 100%;
-  width: 100%;
-  margin-bottom: 20px;
-}*/
-
-/*.table {
-  padding-left: 20px;
-  padding-right: 20px;
-}*/
 
 .playlist {
   position: absolute;
@@ -51,22 +35,6 @@ body {
   max-width:650px;
 }
 
-/*.playlist {
-  height: auto;
-  max-width:300px;
-  top: 30px;
-  left: 0px;
-  /*bottom: 0px;*/
-  /*position: absolute;*/
-  /*overflow: scroll;*/
-/*}*/
-
-/*.songs {
-  height: 50%;
-  position: fixed;
-  overflow-y: scroll;
-}*/
-
 .playlist-entry {
   margin: 10px;
   background-color: #1c1c1f;
@@ -97,8 +65,6 @@ body {
 
 .song, .artists, .album, .playlist-name {
   padding: 5px;
-  /*position: relative;*/
-  /*max-width: 200px;*/
 }
 
 .song, .artists, .album {
@@ -137,28 +103,16 @@ body {
   font-size: 20px;
   font-weight: bold;
   padding: 5px 0px;
-  /*display: block*/
-  /*float:right;*/
-  /*position: absolute;*/
-  /*top:0px;*/
-  /*height: 10px;*/
-  /*padding: 5px 0px;*/
 }
 
 .topbar {
-  /*left: 10px;*/
   height:10%;
   width:1030px;
 }
 
 .logout {
-  /*display:block;*/
   position: relative;
   float:right;
   padding-top: 5px;
   padding-bottom: 5px;
 }
-
-/*a>.logout {
-  color: #88898c;
-}*/
