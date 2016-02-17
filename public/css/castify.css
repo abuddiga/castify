@@ -4,16 +4,75 @@ body {
   /*background-color: rgb(18, 19, 20);*/
   background-color: #121314;
   color: #88898c;
+  /*width: 100%;*/
+  /*height: auto;*/
+  /*overflow: hidden;*/
 }
 
+/*table {
+  max-width: 100%;
+  width: 100%;
+  margin-bottom: 20px;
+}*/
+
+/*.table {
+  padding-left: 20px;
+  padding-right: 20px;
+}*/
+
+.playlist {
+  position: absolute;
+  top:30px;
+  width: 30%;
+  height:100%;
+  overflow:scroll;
+}
+
+.player {
+  position: absolute;
+  top:30px;
+  left:450px;
+  width: 650px;
+  height: 40%;
+}
+
+.songs {
+  position: absolute;
+  top:435px;
+  left:450px;
+  width:650px;
+  height: 50%;
+  max-width:650px;
+  overflow: scroll;
+}
+
+.songs-table {
+  width:650px;
+  max-width:650px;
+}
+
+/*.playlist {
+  height: auto;
+  max-width:300px;
+  top: 30px;
+  left: 0px;
+  /*bottom: 0px;*/
+  /*position: absolute;*/
+  /*overflow: scroll;*/
+/*}*/
+
+/*.songs {
+  height: 50%;
+  position: fixed;
+  overflow-y: scroll;
+}*/
+
 .playlist-entry {
+  margin: 10px;
   background-color: #1c1c1f;
   border-top: 0.25px solid rgb(128, 128, 128);
   border-bottom: 0.25px solid rgb(128, 128, 128);
   color: rgb(223, 224, 230);
-}
-
-.playlist-name {
   padding: 5px;
 }
 
@@ -22,22 +81,37 @@ body {
 }
 
 .song-entry {
+  margin: 10px;
   background-color: rgb(18, 19, 20);
   border-top: 0.25px solid rgb(128, 128, 128);
   border-bottom: 0.25px solid rgb(128, 128, 128);
   color: rgb(223, 224, 230);
+  position: relative;
+  width: 650px;
+  max-width: 650px;
 }
 
 .song-entry:hover {
   background-color: #1c1c1f;
 }
 
-.song, .artists, .album {
-  padding: 5px 0px;
-  max-width: 200px;
+.song, .artists, .album, .playlist-name {
+  padding: 5px;
+  /*position: relative;*/
+  /*max-width: 200px;*/
 }
 
-.selected {
+.song, .artists, .album {
+  max-width: 217px;
+}
+
+.selected-track {
+  background-color: #1c1c1f;
+  color: #648f00;
+}
+
+.selected-playlist {
+  background-color: rgb(34, 35, 38);
   color: #648f00;
 }
 
@@ -58,3 +132,33 @@ body {
   box-shadow: 0 1px 2px rgba(0,0,0,.1);
   margin-top: 10px;
 }
+
+#title {
+  font-size: 20px;
+  font-weight: bold;
+  padding: 5px 0px;
+  /*display: block*/
+  /*float:right;*/
+  /*position: absolute;*/
+  /*top:0px;*/
+  /*height: 10px;*/
+  /*padding: 5px 0px;*/
+}
+
+.topbar {
+  /*left: 10px;*/
+  height:10%;
+  width:1030px;
+}
+
+.logout {
+  /*display:block;*/
+  position: relative;
+  float:right;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+/*a>.logout {
+  color: #88898c;
+}*/

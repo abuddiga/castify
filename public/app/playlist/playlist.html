@@ -1,31 +1,46 @@
-<div class="nav">
-  <a ng-click="logout()" class="btn btn-primary">Log out</a>
+
+<div class="topbar">
+  <span id="title">Castify</span>
+  <span class="logout" ng-click="logout()">Log out</span>
 </div>
-<div class="video-player">
-  <div id="player"></div>
-  <div class="video-player-details">
-    <h3>{{data.currentVideo.snippet.title}}</h3>
-    <div>{{data.currentVideo.snippet.description}}</div>
+
+
+<div class="row">
+  <div class="col-lg-4 playlist">
+    <table>
+      <tr class="playlist-header">
+        <th>PLAYLISTS</th>
+      </tr>
+      <tr class="playlist-entry" ng-class="{ 'selected-playlist': $index == data.currentPlaylistIndex }" ng-repeat="playlist in data.playlists track by $index"> 
+        <td class="playlist-name" ng-click="selectPlaylist($index)">
+          {{playlist.name}}
+        </td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="col-lg-12 player">
+    <div class="video-player">
+      <div id="player"></div>
+    </div>
   </div>
 </div>
 
-<table>
-  <tr class="playlist-entry" ng-class="{ 'selected': $index == data.currentPlaylistIndex }" ng-repeat="playlist in data.playlists track by $index"> 
-    <td class="playlist-name" ng-click="selectPlaylist($index)">
-      {{playlist.name}}
-    </td>
-  </tr>
-</table>
 
-<table>
-  <tr class="songs-header">
-    <td>SONG</td>
-    <td>ARTIST</td>
-    <td>ALBUM</td>
-  </tr>
-  <tr class="song-entry" ng-class="{ 'selected': $index == data.currentSongIndex }" ng-repeat="song in data.songList track by $index" ng-click="changeSong($index)"> 
-    <td class="song">{{song.track.name}}</td>
-    <td class="artists">{{song.track.artists[0].name}}</td>
-    <td class="album">{{song.track.artists[0].name}}</td>
-  </tr>
-</table>
+<div class="row">
+  <div class="col-lg-12"></div>
+  <div class="col-lg-12 songs">
+    <table class="songs-table">
+      <tr class="songs-header">
+        <th>SONG</th>
+        <th>ARTIST</th>
+        <th>ALBUM</th>
+      </tr>
+      <tr class="song-entry" ng-class="{ 'selected-track': $index == data.currentSongIndex }" ng-repeat="song in data.songList track by $index" ng-click="changeSong($index)"> 
+        <td class="song text-overflow">{{song.track.name}}</td>
+        <td class="artists text-overflow">{{song.track.artists[0].name}}</td>
+        <td class="album text-overflow">{{song.track.artists[0].name}}</td>
+      </tr>
+    </table>
+  </div>
+</div>
