@@ -36,7 +36,7 @@
         <th>ARTIST</th>
         <th>ALBUM</th>
       </tr>
-      <tr class="song-entry" ng-class="{ 'selected-track': $index == data.currentSongIndex }" ng-repeat="song in data.songList track by $index" ng-click="changeSong($index)"> 
+      <tr class="song-entry" ng-class="{ 'selected-track': song === data.currentSong }" ng-repeat="song in data.songList track by $index" ng-click="changeSong($index)"> 
         <td class="song text-overflow">{{song.track.name}}</td>
         <td class="artists text-overflow">{{song.track.artists[0].name}}</td>
         <td class="album text-overflow">{{song.track.artists[0].name}}</td>

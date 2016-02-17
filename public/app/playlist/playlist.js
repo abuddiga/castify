@@ -8,7 +8,7 @@ angular.module('castify.playlist', [])
     currentPlaylist: {},
     currentPlaylistIndex: 0,
     songList: [],
-    // currentSong: {},
+    currentSong: {},
     currentVideo: {},
     currentSongIndex: 0
   };
@@ -87,6 +87,7 @@ angular.module('castify.playlist', [])
 
   $scope.selectSong = function(index) {
     var selectedSong = $scope.data.songList[index];
+    $scope.data.currentSong = selectedSong;
 
     return Video.getVideo(selectedSong)
     .then(function (videos) {
