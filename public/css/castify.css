@@ -100,6 +100,7 @@ body {
 }
 
 #title {
+  color: #648f00;
   font-size: 20px;
   font-weight: bold;
   padding: 5px 0px;
@@ -112,7 +113,7 @@ body {
 
 .logout {
   background-color: #121314;
-  color: #88898c;
+  color: #648f00;
   border: none;
   position: relative;
   float:right;
