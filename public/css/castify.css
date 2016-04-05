@@ -17,7 +17,7 @@ body {
   top:30px;
   left:450px;
   width: 650px;
-  height: 40%;
+  height: 50%;
 }
 
 .songs {
@@ -25,7 +25,7 @@ body {
   top:435px;
   left:450px;
   width:650px;
-  height: 50%;
+  height: 60%;
   max-width:650px;
   overflow: scroll;
 }
@@ -50,7 +50,8 @@ body {
 
 .song-entry {
   margin: 10px;
-  background-color: rgb(18, 19, 20);
+  /*background-color: rgb(18, 19, 20);*/
+  background-color: #1c1c1f;
   border-top: 0.25px solid rgb(128, 128, 128);
   border-bottom: 0.25px solid rgb(128, 128, 128);
   color: rgb(223, 224, 230);
@@ -60,7 +61,8 @@ body {
 }
 
 .song-entry:hover {
-  background-color: #1c1c1f;
+  /*background-color: #1c1c1f;*/
+  background-color: rgb(34, 35, 38);
 }
 
 .song, .artists, .album, .playlist-name {
@@ -72,7 +74,8 @@ body {
 }
 
 .selected-track {
-  background-color: #1c1c1f;
+  /*background-color: #1c1c1f;*/
+  background-color: rgb(34, 35, 38);
   color: #648f00;
 }
 
@@ -119,4 +122,8 @@ body {
   float:right;
   padding-top: 5px;
   padding-bottom: 5px;
+}
+
+.login-button {
+  background-color: #648f00;
 }
